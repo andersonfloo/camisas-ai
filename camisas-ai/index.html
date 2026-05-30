@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Shirt AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Custom Shirt AI</h1>
+    </header>
+
+    <main class="editor">
+
+        <section class="camisa-container" id="capturaArea">
+
+            <div class="camisa-wrapper">
+
+                <img
+                    src="img/camisa_blanca.png"
+                    id="camisa"
+                    alt="Camisa">
+
+                <div id="zonaDiseno">
+
+                    <img
+                        id="diseno"
+                        draggable="false"
+                        alt="Diseño personalizado">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <aside class="panel">
+
+            <h2>Personalización</h2>
+
+            <label for="subirImagen">Subir imagen</label>
+
+            <input
+                type="file"
+                id="subirImagen"
+                accept="image/*">
+
+            <label for="talla">Talla</label>
+
+            <select id="talla">
+                <option>S</option>
+                <option>M</option>
+                <option selected>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+            </select>
+
+            <h3>Color de camisa</h3>
+
+            <div class="color-buttons">
+
+                <button type="button" data-color="blanca">⚪ Blanca</button>
+                <button type="button" data-color="negra">⚫ Negra</button>
+                <button type="button" data-color="azul">🔵 Azul</button>
+
+            </div>
+
+            <hr>
+
+            <button type="button" id="eliminarDiseno" class="panel-btn">
+                🗑 Eliminar diseño
+            </button>
+
+            <button type="button" id="vistaPrevia" class="panel-btn">
+                📷 Vista previa
+            </button>
+
+            <hr>
+
+            <button type="button" class="panel-btn ia-btn">
+                ✂️ Quitar fondo IA
+            </button>
+
+            <button type="button" class="panel-btn carrito-btn">
+                🛒 Agregar al carrito
+            </button>
+
+        </aside>
+
+    </main>
+
+    <div id="modalPreview">
+
+        <div class="preview-content">
+
+            <h2>Vista previa</h2>
+
+            <img id="previewImage" alt="Vista previa de la camisa">
+
+            <div class="preview-buttons">
+
+                <button type="button" id="descargarPNG" class="panel-btn">
+                    ⬇ Descargar PNG
+                </button>
+
+                <button type="button" id="cerrarPreview" class="panel-btn">
+                    ❌ Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

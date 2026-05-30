@@ -1,0 +1,370 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --header-height: 80px;
+    --color-primary: #4b0082;
+    --color-secondary: #9370db;
+    --color-bg: #f3f4f6;
+    --color-canvas: #ececec;
+    --panel-width-desktop: 350px;
+    --panel-width-tablet: 280px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--color-bg);
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.editor {
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100dvh - var(--header-height));
+}
+
+.camisa-container {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: var(--color-canvas);
+    overflow: hidden;
+}
+
+.camisa-wrapper {
+    position: relative;
+    display: inline-block;
+    width: min(400px, 85vw, 100%);
+    max-height: calc(100vh - var(--header-height) - 40px);
+    max-height: calc(100dvh - var(--header-height) - 40px);
+}
+
+#camisa {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - var(--header-height) - 40px);
+    max-height: calc(100dvh - var(--header-height) - 40px);
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+#zonaDiseno {
+    position: absolute;
+    width: 55%;
+    aspect-ratio: 220 / 260;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    border: 2px dashed rgba(75, 0, 130, 0.25);
+    touch-action: none;
+    -ms-touch-action: none;
+    -webkit-touch-callout: none;
+}
+
+#diseno {
+    position: absolute;
+    width: 72%;
+    left: 14%;
+    top: 12%;
+    cursor: grab;
+    display: none;
+    touch-action: none;
+    -ms-touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+}
+
+#diseno:active {
+    cursor: grabbing;
+}
+
+.panel {
+    width: var(--panel-width-desktop);
+    flex-shrink: 0;
+    background: white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+}
+
+.panel h2 {
+    color: var(--color-primary);
+    font-size: 1.35rem;
+}
+
+.panel h3 {
+    margin-top: 4px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.panel label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+}
+
+input[type="file"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: white;
+}
+
+.color-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+button {
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.panel-btn {
+    width: 100%;
+}
+
+.color-buttons button {
+    width: 100%;
+    padding: 10px 6px;
+    font-size: 0.8rem;
+    background: #f3f4f6;
+    color: #333;
+}
+
+.ia-btn {
+    background: var(--color-secondary);
+    color: white;
+}
+
+.carrito-btn {
+    background: var(--color-primary);
+    color: white;
+    font-weight: bold;
+}
+
+hr {
+    margin: 6px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+#eliminarDiseno {
+    background: #dc2626;
+    color: white;
+}
+
+#vistaPrevia {
+    background: #0f766e;
+    color: white;
+}
+
+#modalPreview {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 16px;
+}
+
+.preview-content {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    max-height: 95vh;
+    max-height: 95dvh;
+    overflow-y: auto;
+}
+
+.preview-content h2 {
+    margin-bottom: 20px;
+    color: var(--color-primary);
+}
+
+#previewImage {
+    max-width: 100%;
+    max-height: 60vh;
+    max-height: 60dvh;
+    object-fit: contain;
+}
+
+.preview-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#descargarPNG {
+    background: #16a34a;
+    color: white;
+}
+
+#cerrarPreview {
+    background: #dc2626;
+    color: white;
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+
+    :root {
+        --header-height: 70px;
+    }
+
+    .panel {
+        width: var(--panel-width-tablet);
+        padding: 18px;
+        gap: 10px;
+    }
+
+    .panel h2 {
+        font-size: 1.15rem;
+    }
+
+    .camisa-wrapper {
+        width: min(340px, 80vw, 100%);
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .color-buttons button {
+        font-size: 0.75rem;
+        padding: 8px 4px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+
+    :root {
+        --header-height: 60px;
+    }
+
+    header {
+        padding: 0 16px;
+    }
+
+    body {
+        overflow-y: auto;
+    }
+
+    .editor {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .camisa-container {
+        flex: none;
+        min-height: 42vh;
+        min-height: 42dvh;
+        max-height: 52vh;
+        max-height: 52dvh;
+        padding: 12px;
+    }
+
+    .camisa-wrapper {
+        width: min(280px, 88vw, 100%);
+        max-height: calc(52vh - 24px);
+        max-height: calc(52dvh - 24px);
+    }
+
+    #camisa {
+        max-height: calc(52vh - 24px);
+        max-height: calc(52dvh - 24px);
+    }
+
+    .panel {
+        width: 100%;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.12);
+        padding: 20px 16px 28px;
+    }
+
+    .color-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .color-buttons button {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    .preview-buttons {
+        flex-direction: column;
+    }
+}
+
+/* Mobile pequeño */
+@media (max-width: 380px) {
+
+    .camisa-wrapper {
+        width: min(240px, 92vw, 100%);
+    }
+
+    .panel {
+        padding: 16px 12px 24px;
+    }
+}
