@@ -15,8 +15,8 @@ app.get('/', (req, res) => {
 });
 
 // Por si alguna ruta interna de tus páginas se recarga
-// Por esto:
-app.get('/*', (req, res) => {
+// Pon esto en su lugar:
+app.get(/^(?!\/(css|img|js|pages)).*$/, (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
