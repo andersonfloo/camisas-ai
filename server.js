@@ -3,21 +3,20 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Servir carpetas de recursos directamente desde la raíz
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/pages', express.static(path.join(__dirname, 'pages')));
+// Servir carpetas de recursos apuntando correctamente a la subcarpeta
+app.use('/css', express.static(path.join(__dirname, 'camisas-ai', 'css')));
+app.use('/img', express.static(path.join(__dirname, 'camisas-ai', 'img')));
+app.use('/js', express.static(path.join(__dirname, 'camisas-ai', 'js')));
+app.use('/pages', express.static(path.join(__dirname, 'camisas-ai', 'pages')));
 
-// Servir el index.html principal
+// Servir el index.html principal dentro de camisas-ai
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'camisas-ai', 'index.html'));
 });
 
-// Por si alguna ruta interna de tus páginas se recarga
-// Pon esto en su lugar:
+// Filtro definitivo para redirecciones internas
 app.get(/^(?!\/(css|img|js|pages)).*$/, (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'camisas-ai', 'index.html'));
 });
 
 app.listen(PORT, () => {
